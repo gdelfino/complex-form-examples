@@ -1,0 +1,21 @@
+!!!
+%html{ "xml:lang" => "es", :lang => "es", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %title
+      = h(yield(:title) || "Untitled")
+
+    = stylesheet_link_tag 'application'
+
+    = yield(:head)
+    - javascript_tag do
+      = yield(:jstemplates)
+
+  %body
+    #container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :id => "flash_#{name}"
+
+      - if show_title?
+        %h1=h yield(:title)
+
+      = yield

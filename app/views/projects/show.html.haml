@@ -1,0 +1,31 @@
+- title "Project"
+
+%p
+  %strong Name
+  =h @project.name
+
+%p
+  %strong Author:
+  =h @project.author.name if @project.author
+
+%h3 Tasks
+
+%ul
+  - @project.tasks.each do |task|
+    %li
+      = h task.name
+      \:
+      = task.colors.map(&:name).join(', ')
+
+%h3 Tags
+
+%ul
+  - @project.tags.each do |tag|
+    %li=h tag.name
+
+%p
+  = link_to "Edit", edit_project_path(@project)
+  |
+  = link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", projects_path
